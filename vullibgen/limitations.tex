@@ -1,0 +1,81 @@
+% \newpage
+
+
+\section{Limitation}~\label{sec: limitation}
+Our work has several limitations, which we plan to address in our future work:
+
+\noindent \textbf{Challenges in Generating Long and Complex Package Names}. 
+As discussed in Section~\ref{sec: trade off}, the effectiveness of \detector{} depends on the token length and the number of unique packages.
+Table~\ref{tab: baseline cmp} shows Java is more challenging than others while having the highest token length and unique packages (Table~\ref{tab: dataset info}). 
+%Vicuna-13B's Accuracy@1 in Java vulnerabilities (0.710) is less than that of Python vulnerabilities (0.935).
+To improve the generation of complicated languages such as Java, we plan to further enhance the knowledge of LLM using techniques such as constrained decoding~\cite{post-vilar-2018-fast}. We leave this as our future work.
+% two main features of package names, the number of unique packages in the dataset and the average token number of packages.
+% Thus, exploring how to generate longer package names or how to generate package names from a limited number of training data is the future work of this paper.
+In particular, it may pose further challenges to generate packages that are exceptionally long. To understand the distribution of token lengths, we report the quantile statistics of the token lengths in Table~\ref{tab: quantile} of Appendix. Table~\ref{tab: quantile} shows that the majority of the package names are shorter than 20 tokens, therefore, exceptionally long package names are very rare. 
+
+\noindent \textbf{Challenges in Generating Package Names with Limited Ecosystem Knowledge}. 
+Though \detector{} has demonstrated its effectiveness in four widely-used programming languages, some other programming languages, e.g., C/C++, do not have a commonly used ecosystem that maintains all its packages.
+Thus, it is difficult to generate/retrieve the affected packages of C/C++ vulnerabilities as we do not have specific ranges during the RAG step of \detector{}.
+Exploring how to generate RAG results without a commonly used ecosystem (e.g., Maven or Pypi) or collecting other useful information for RAG is the future work of this paper.
+
+% \noindent \textbf{Future Work on Deploying \detector{} in Real World Settings.}
+% In Section~\ref{sec: real world}, we deploy \detector{} to generate the names of 28 affected Java packages (4 of them are JS). 
+% %, and 4 of these are actually JavaScript (because JS packages are also treated as Java, e.g., "jquery" is also treated as "org.webjars.npm:jquery").
+% We focus on Java for two main reasons.
+% First, the submission to GitHub advisory requires domain expertise for validating the generated results, and our author team has the best expertise in Java.
+% Second, \detector{} was first designed and experimented for the Java dataset (VulLib) before extended to the other three programming languages.
+% We plan to also submit the other programming languages in future work.
+% We project similar acceptance rates as Java, since the platform, submission process, and \detector{}'s performance are all similar (or even higher).
+
+
+\section{Ethical Consideration}
+
+\noindent \textbf{License/Copyright.}
+\detector{} utilizes open-source data from GitHub Advisory, along with four third-party package ecosystems.
+We refer users to the original licenses accompanying the resources of these data.
+
+\noindent \textbf{Intended Use.}
+\detector{} is designed as an automatic tool to assist maintainers of vulnerability databases, e.g., GitHub Advisory.
+Specifically, \detector{} helps generate the names of affected packages to complement the missing data of these databases.
+The usage of \detector{} is also illustrated in Section~\ref{sec:approach} and our intended usage of \detector{} is consistent with that of GitHub Advisory~\cite{githubAD}.
+
+\noindent \textbf{Potential Misuse.}
+Similar to existing open-source LLMs, one potential misuse of \detector{} is generating harmful content.
+Considering that we use open-source vulnerability data for LLM fine-tuning, the LLM might view harmful content during this step.
+To avoid harmful content, we use only reviewed vulnerability data in GitHub Advisory, so such misuse will unlikely happen. 
+Overall, the scientific and social benefits of the research arguably outweigh the small risk of their misuse.
+
+
+
+% \xueqing{Unify the format of the reference, e.g., URL}
+
+
+% Though \detector{} has demonstrated its effectiveness in four widely-used programming languages, some other programming languages, e.g., C/C++, do not have a commonly used ecosystem that maintains all its packages.
+% Thus, it is difficult to generate/retrieve the affected packages of C/C++ vulnerabilities as we do not have specific ranges during the RAG step of \detector{}.
+% Exploring how to generate RAG results without a commonly used ecosystem (e.g., Maven or Pypi) or collecting other useful information for RAG is the future work of this paper.
+
+
+
+% \subsubsection*{\textbf{Identifying vulnerable libraries of other programming languages}}
+% \detector{} is generalizable enough because it does not depend on specific characteristics of Java vulnerabilities.
+% Take Python as an example programming language, \detector{} can identify the affected libraries after training on a dataset of Python <vulnerability, library> pairs, and the recommended libraries can be generated by entity-linking approaches with the descriptions of Python libraries (e.g., those collected from PyPI~\cite{pypi}).
+% We implement and evaluate \detector{} on Java vulnerabilities because vulnerable Java libraries are difficult to identify due to their large scale and complicated structures.
+% Another reason is that Java libraries are widely used in software development~\cite{wang2020empirical}, thus indicating the importance of identifying vulnerable Java libraries.
+
+ 
+% \subsubsection*{\textbf{Larger pre-trained language models}}
+% Although we expect that the larger, even commercial LLMs can be more effective in identifying vulnerable libraries.
+% First and most pragmatically, these larger models lead to higher training and prediction cost of GPU resources and energies, thus increasing the usage burden in practice.
+% And from a scientific perspective, the evaluation results of a 7B/13B model are sufficient to show the effectiveness of \detector{}, and its components.
+% As shown in Section~\ref{sec: rq1}, there is no substantial difference between the F1@1 of 7B and 13B models.
+% Thus, LLaMa-7B and LLaMa-13B are suitable for this task.
+
+
+% We do admit that larger LLMs might increase the effectiveness of identifying vulnerable libraries; however, training and inference on these larger models 
+% The answer to this question is no because complicated deep-learning models are computationally more expensive and require larger training sets~\cite{thompson2020computational}.
+% As shown in Section~\ref{sec: rq4}, there are 310,844 Java libraries with only 12,716 <vulnerability, library> pairs
+% Considering the imbalance of the large number of libraries and the small number of <vulnerability, library> pairs for training, a BERT-FNN model is suitable for this task.
+
+
+% Taking Java vulnerabilities as an example, there are 310,844 Java libraries with only 12,716 <vulnerability, library> pairs.
+% Even if we manually label all the CVEs, the number of libraries with various programming languages is still larger than <vulnerability, library> pairs.

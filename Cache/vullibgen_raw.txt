@@ -1,0 +1,78 @@
+```
+Title: VulLibGen: Generating Names of Vulnerability-Affected Packages via a Large Language Model
+
+Slide: 1
+Header: TABLE OF CONTENT
+Content: 1. Introduction
+2. Background
+3. Approach
+4. Evaluation
+5. Limitations
+6. Ethical Consideration
+7. Threats
+8. Conclusion
+9. Summary
+10. End
+
+Slide: 2
+Header: INTRODUCTION
+Content: - The paper addresses the task of automatically extracting package names and versions affected by security vulnerabilities.
+- Existing databases like NVD and GitHub Advisory contain reports with vulnerability descriptions, affected packages, and versions.
+- Current methods for identifying affected packages have low accuracy due to the use of smaller models.
+- The proposed framework, VulLibGen, leverages large language models (LLMs) to generate affected package names directly.
+
+Slide: 3
+Header: BACKGROUND
+Content: - Existing work on affected package identification typically uses smaller models and ranking/retrieval methods.
+- These methods compute similarity scores between vulnerability descriptions and package descriptions, but are limited by the large number of packages.
+- Re-ranking with BERT has been used to improve accuracy, but there is still room for improvement.
+- The paper proposes using LLMs to generate package names directly, addressing scalability and accuracy issues.
+
+Slide: 4
+Header: APPROACH
+Content: - The VulLibGen framework employs three main techniques: supervised fine-tuning (SFT), retrieval-augmented generation (RAG), and a local search algorithm.
+- SFT and in-context learning are used to enhance the domain knowledge of LLMs.
+- RAG is employed to further enhance domain knowledge when SFT is not feasible.
+- The local search algorithm addresses the issue of generating non-existing package names by matching generated outputs with existing package names.
+
+Slide: 5
+Header: EVALUATION
+Content: - The evaluation setup includes datasets from GitHub Advisory, focusing on Java, JS, Python, and Go vulnerabilities.
+- Comparative methods include FastXML, LightXML, Chronos, and VulLibMiner.
+- Models evaluated include commercial LLMs (ChatGPT, GPT-4) and open-source LLMs (LLaMa, Vicuna).
+- Metrics used are Precision@k, Recall@k, and F1@k.
+- VulLibGen outperforms existing methods in accuracy, with the best performance achieved using supervised fine-tuning on the Vicuna-13B model.
+
+Slide: 6
+Header: LIMITATIONS
+Content: - Challenges in generating long and complex package names, particularly for languages like Java.
+- Difficulty in generating package names for languages with limited ecosystem knowledge, such as C/C++.
+- Future work includes enhancing LLM knowledge using techniques like constrained decoding and exploring methods for generating RAG results without a commonly used ecosystem.
+
+Slide: 7
+Header: ETHICAL CONSIDERATION
+Content: - The framework uses open-source data from GitHub Advisory and third-party package ecosystems, adhering to original licenses.
+- Intended use is to assist maintainers of vulnerability databases in generating names of affected packages.
+- Potential misuse includes generating harmful content, but measures are taken to minimize this risk by using reviewed vulnerability data.
+
+Slide: 8
+Header: THREATS
+Content: - External validity threat: the Maven corpus used in post-processing does not include all Java libraries, potentially missing new or private libraries.
+- Internal validity threat: instrumentation effects from faults in the tool or third-party tools.
+- Mitigation includes manual inspection of intermediate results to ensure accuracy.
+
+Slide: 9
+Header: CONCLUSION
+Content: - VulLibGen is the first framework to use LLM generation for identifying vulnerable packages.
+- The framework employs retrieval-augmented generation, supervised fine-tuning, and a local search technique to improve accuracy.
+- VulLibGen achieves an accuracy of 0.806, outperforming the best SOTA approaches with an accuracy of 0.721.
+- The framework has practical value, with a significant number of submitted package names accepted and merged into GitHub Advisory.
+
+Slide: 10
+Header: SUMMARY
+Content: - VulLibGen leverages LLMs to improve the accuracy of identifying affected packages in vulnerability reports.
+- Techniques like SFT, RAG, and local search enhance the framework's performance.
+- Evaluations show significant improvements over existing methods, with practical applications validated by real-world submissions.
+
+Slide: END
+```

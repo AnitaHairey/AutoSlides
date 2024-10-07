@@ -1,0 +1,18 @@
+Here are the extracted figures from the provided LaTeX files:
+
+```Figure
+Path: figures/vulnerability-report.drawio.pdf
+Description: This figure shows the GitHub Advisory Report for CVE-2020-2318. It is used in the introduction section to illustrate an example of a vulnerability report that includes the description, affected packages, and affected versions.
+```
+
+```Figure
+Path: figures/efficiency_accuracy_advanced.drawio.pdf
+Description: This figure visualizes the trade-offs between efficiency and accuracy of different methods for identifying vulnerable packages. It compares the computational cost and accuracy of each method, highlighting the performance of the proposed method, \detector{}.
+```
+
+```Figure
+Path: figures/workflow-v3.drawio.pdf
+Description: This figure presents the \detector{} framework. It illustrates the overall workflow of the proposed method, including supervised fine-tuning, retrieval-augmented generation (RAG), and local search techniques.
+```
+
+Note: The figures are extracted based on the provided LaTeX content. If there are more figures in other parts of the LaTeX files not included in the provided content, they are not listed here.

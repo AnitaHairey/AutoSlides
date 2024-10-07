@@ -1,0 +1,25 @@
+% \detector{} also includes the input augmentation technique to help identify zero-shot vulnerable libraries (those not occurring during training) and the post-processing technique to help address \detector{}'s hallucinations. 
+% We have conducted a comprehensive evaluation of demonstrating \detector{}'s effectiveness in identifying vulnerable libraries with an average F1 score of 0.626 while the state-of-the-art/practice approaches achieve only 0.561. 
+% We have demonstrated the effectiveness of the post-processing technique with an average improvement of F1@1 by 9.3\%, and the effectiveness of the input augmentation technique with an average improvement of F1@1 by 39\% in identifying zero-shot libraries.
+
+% adding recommended libraries with an average improvement of F1@1 by 38\% in identifying zero-shot libraries.
+% We have shown the effectiveness of post-processing by improving the average F1@1 by 9.3\%.
+
+
+% In this paper, we have presented our work, being the first to model vulnerable-library identification as an entity-link task and to identify zero-shot libraries.   
+% We have designed a coarse-grained TF-IDF matcher to efficiently screen out a set of candidate libraries and a fine-grained BERT-FNN model to effectively identify the affected libraries for a given vulnerability.
+% We have constructed a new dataset that is manually labeled and validated by senior software engineers, including 2,789 Java vulnerabilities and 324 negative samples.    
+% We have conducted a comprehensive evaluation of demonstrating \detector{}'s effectiveness and efficiency for library identification, achieving an average F1 score of 0.542, while the state-of-the-art/practice approaches achieve only 0.377. We have demonstrated  \detector{}'s high value of security practice by using \detector{} to identify a new set of 7,936 <vulnerability, library> pairs for Java, which do not appear yet in NVD's existing 4,780 pairs for Java.
+
+% \vspace{-0.15cm}
+
+% \section{Data Availability}
+% We list 225 <vulnerability, library> pairs to show high value of security practice on our anonymous website~\cite{repo}.
+% We plan to open-source our  \javadata{} dataset, and all evaluation results at the publication of our paper. 
+% We do not open-source our code repository now due to the security requirement of our industry partner.
+% However, in Section~\ref{sec:approach}, we list all details of our approach, so that our approach can be easily reproduced.
+
+\section{Conclusion}\label{sec:conclusion}
+In this paper, we have proposed \detector{}, the first framework for identifying vulnerable packages using LLM generation. \detector{} conducts retrieval-augmented generation, supervised fine-tuning, and a local search technique to improve the generation. \detector{} is highly effective, achieving an accuracy of 0.806 while the best SOTA approaches achieve only 0.721.
+\detector{} has shown high value to security practice. 
+We have submitted 60 pairs of <vulnerability, affected package> to GitHub advisory and 34 of them have been accepted and merged. 

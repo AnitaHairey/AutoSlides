@@ -1,0 +1,226 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX, which is strongly recommended.
+\pdfoutput=1
+% In particular, the hyperref package requires pdfLaTeX in order to break URLs across lines.
+
+\documentclass[11pt,dvipsnames]{article}
+
+% Remove the "review" option to generate the final version.
+\usepackage[]{ACL2023}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out.
+% However, it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+\usepackage{multirow,hyperref}
+\usepackage{graphicx}
+\usepackage{diagbox}
+\usepackage{booktabs}
+% \usepackage{subfigure}
+\usepackage{xspace}
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+% \usepackage{algorithm}
+% \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+% \usepackage{amssymb}
+\usepackage{bbding}
+\usepackage{threeparttable}
+\usepackage{amsmath}
+\usepackage{adjustbox}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{semantic}
+\usepackage{newfloat}
+\usepackage{framed}
+\usepackage{threeparttable}
+
+\newtheorem{definition}{\bf Definition}
+\newtheorem{theorem}{\bf Theorem}
+\newtheorem{lemma}{\bf Lemma}
+\newtheorem{assumption}{\bf Assumption}
+\newtheorem{remark}{\bf Remark}
+\newtheorem{proposition}{\bf Proposition}
+\newtheorem{corollary}{\bf Corollary}
+\newtheorem{property}{\bf Property}
+\newtheorem{problem}{\bf Problem}
+\newcommand{\e}[1]{\ensuremath{\times 10^{#1}}}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\unsim}{\mathord{\sim}}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\usepackage{makecell}
+
+% \PassOptionsToPackage{prologue,dvipsnames}{xcolor}
+% \usepackage[dvipsnames]{xcolor}
+
+\usepackage{hyperref}
+\hypersetup{
+colorlinks=true,
+linkcolor=blue,
+filecolor=megenta
+}
+
+
+
+\newcounter{mydoublefinding}
+\counterwithin*{mydoublefinding}{subsection}
+\newenvironment{mydoublefinding}[2][]{%
+\stepcounter{mydoublefinding}%
+\begin{framed}%
+\noindent\textbf{Findings #1.\themydoublefinding} #2%
+\end{framed}}
+
+\newcounter{myfindings}
+\counterwithin*{myfindings}{section}
+\newenvironment{myfindings}[2][]{%
+\stepcounter{myfindings}%
+\begin{framed}%
+\noindent\textbf{Summary#1:} #2%
+\end{framed}}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
+
+
+\DeclareFloatingEnvironment[fileext=frm,placement={!ht},name=Rules]{infrule}
+
+
+\lstset{
+    backgroundcolor = \color{yellow!10},    % 背景色：淡黄
+    basicstyle = \ttfamily\footnotesize,           % 基本样式 + 小号字体
+    rulesepcolor= \color{gray},             % 代码块边框颜色
+    breaklines = true,                  % 代码过长则换行
+    % numbers = left,                     % 行号在左侧显示
+    % numberstyle = \small,               % 行号字体
+    keywordstyle = \color{blue},            % 关键字颜色
+    commentstyle =\color{gray!100},        % 注释颜色
+    stringstyle = \color{red!100},          % 字符串颜色
+    frame = shadowbox,                  % 用（带影子效果）方框框住代码块
+    showspaces = false,                 % 不显示空格
+    columns = fixed,                    % 字间距固定
+    morekeywords = {as},                
+    % 自加新的关键字（必须前后都是空格）
+    deletendkeywords = {compile},    
+    % 删除内定关键字；删除错误标记的关键字用deletekeywords删！
+    escapeinside=``
+}
+\usepackage{algpseudocode}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+\newcommand\detector{VulLibGen}
+% \newcommand\DETECTOR{DETECTOR}
+\newcommand\vullib{VulLib}
+% \newcommand\JAVADATA{JAVADATA}
+% \newcommand\javadataone{JavaData-One}
+% \newcommand\javadatazero{JavaData-Zero}
+\newcommand\veracode{Veracode}
+\newcommand\verajava{VeraJava}
+\newcommand\veradata{Veracode}
+
+\newcommand{\tianyu}[1]{\textcolor{blue}{Tianyu (TBD): #1}}
+
+\newcommand{\xueqing}[1]{\textcolor{red}{Xueqing (TBD): #1}}
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{VulLibGen: Generating Names of Vulnerability-Affected Packages via a Large Language Model}
+
+
+\author{
+  Tianyu Chen\textsuperscript{1}, Lin Li\textsuperscript{2}, Liuchuan Zhu\textsuperscript{2}, Zongyang Li\textsuperscript{1}, Xueqing Liu\textsuperscript{3}\\
+  \textbf{Guangtai Liang\textsuperscript{2}, Qianxiang Wang\textsuperscript{2}, Tao Xie\textsuperscript{1\thanks{*Corresponding author}
+}} \\
+  Key Lab of HCST (PKU), MOE; SCS, Peking University\textsuperscript{1}\\
+  \texttt{\{tychen811,taoxie\}@pku.edu.cn, lizongyang@stu.pku.edu.cn} \\
+  Huawei Cloud Computing Technologies Co., Ltd.\textsuperscript{2} \\
+  \texttt{\{lilin88,zhuliuchuan1,liangguangtai,wangqianxiang\}@huawei.com} \\
+  Stevens Institute of Technology\textsuperscript{3}, \texttt{xliu127@stevens.edu}\\
+}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+
+Security practitioners maintain vulnerability reports (e.g., GitHub Advisory) to help developers mitigate security risks. An important task for these databases is automatically extracting structured information mentioned in the report, e.g., the affected software packages, to accelerate the defense of the vulnerability ecosystem. 
+%However, in more than half of the reports, the affected packages are missing or incorrect.
+% \xueqing{is "missing or incomplete" correct?}. 
+%To help reduce the manual efforts in completing and validating the affected-package field, existing work proposes to automatically identify this information. 
+
+
+However, it is challenging for existing work on affected package identification to achieve a high accuracy. One reason is that all existing work focuses on relatively smaller models, thus they cannot harness the knowledge and semantic capabilities of large language models. 
+
+%all existing work suffers from low accuracy,  relying on relatively small models such as logistic regression and BERT due to linear time cost to the number of packages under consideration. 
+
+To address this limitation, we propose \detector{}~\footnote{Our data and code can be found at \url{https://github.com/q5438722/VulLibGen}.}, the first method to use LLM for affected package identification. 
+%we propose the first work, a framework named \detector{}, to explore the use of a large language model (LLM) for directly generating the names of affected packages.
+%ranking approaches that rank the existing packages based on their similarity to the vulnerability description in each vulnerability report, yet incurring high analysis cost. 
+%Nevertheless, due to the high inference cost, ranking-based approaches cannot scale to larger language models. 
+%To leverage the capability of LLMs for vulnerable package identification, 
+%First, we conduct a pilot study to examine the feasibility of LLM generation for this task, which shows that the raw generation output has a 42\% accuracy. Based on the study results, we propose a \detector{} framework by employing the retrieval augmented generation (RAG) and a post-processing local search algorithm so the generated package must exist.
+In contrast to existing work, \detector{} proposes the novel idea to directly generate the affected package. To improve the accuracy, \detector{} employs supervised fine-tuning (SFT), retrieval augmented generation (RAG) and a local search algorithm. The local search algorithm is a novel post-processing algorithm we introduce for reducing the hallucination of the generated packages.  
+%
+Our evaluation results show that \detector{} has an average accuracy of 0.806 for identifying vulnerable packages in the four most popular ecosystems in GitHub Advisory (Java, JS, Python, Go) while the best average accuracy in previous work is 0.721. 
+Additionally, \detector{} has high value to security practice:  
+we submitted 60 <vulnerability, affected package> pairs to GitHub Advisory (covers four ecosystems) and 34 of them have been accepted and merged. 
+
+% Additionally, \detector{} brings high value to security practice. 
+% 79\% of our submitted <vulnerability, affected package> pairs are accepted and merged by GitHub Advisory.
+
+% To avoid potential risks posed by vulnerabilities in third-party libraries, security researchers maintain vulnerability databases (e.g., GitHub Advisory) containing vulnerability reports, each of which records the description of a vulnerability and the name list of libraries affected by the vulnerability  (a.k.a.  vulnerable libraries).
+% However, recent studies on about 200,000 vulnerability reports in NVD show that 53.3\% of these reports do not include the name list of vulnerable libraries, and 59.82\% of the included name lists of vulnerable libraries are incomplete or incorrect.
+
+
+%To address the preceding issue, an existing state-of-the-art (SOTA) approach expands vulnerable libraries for a vulnerability in the given vulnerability database, by comparing the description of each collected library with the vulnerability's description to determine whether the library is a vulnerable one.
+%Considering the large number of collected libraries (e.g., 310,844 in Maven) for comparison compared, to reduce analysis cost, this approach heuristically reduces the number of libraries for comparison, yet suffering from false negatives (i.e., some vulnerable libraries are missed) and thus low  identification accuracy. 
+ 
+% To address the preceding issue, in this paper, we propose the first generative approach named \detector{} to generate the name list of vulnerable libraries (out of all the existing libraries) for the given vulnerability by utilizing recent enormous advances in Large Language Models (LLMs), in order to achieve high accuracy. 
+% \detector{} takes only the description of a  vulnerability as input and achieves high identification accuracy based on LLMs' prior knowledge of all the existing libraries.
+% \detector{} also includes the input augmentation technique to help identify zero-shot vulnerable libraries (those not occurring during training) and the post-processing technique to help address \detector{}'s hallucinations. 
+% We evaluate \detector{} using three state-of-the-art/practice approaches  (LightXML, Chronos, and VulLibMiner) that identify vulnerable libraries on an open-source dataset (VulLib).
+% Our evaluation results show that \detector{} can accurately identify vulnerable libraries with an average F1 score of 0.626 while the state-of-the-art/practice approaches achieve only 0.561. 
+% The post-processing technique helps \detector{} achieve an average improvement of  F1@1 by 9.3\%.
+% The input augmentation technique  
+%  helps \detector{} achieve an average improvement of F1@1 by 39\% in identifying zero-shot libraries.
+ 
+ \end{abstract}
+
+\input{introduction}
+\input{background}
+
+\input{approach}
+\input{evaluation}
+% \input{threats}
+\input{related}
+\input{conclusion}
+\input{limitations}
+
+\bibliographystyle{acl_natbib}
+\bibliography{sample-base}
+\input{appendix}
+
+\end{document}
